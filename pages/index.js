@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { PaginatedTable } from "../components/PaginatedTable";
+import { useState } from "react";
 
 export default function Home({ teamsData }) {
   return (
