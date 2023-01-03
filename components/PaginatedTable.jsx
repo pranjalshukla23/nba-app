@@ -6,7 +6,7 @@ export const PaginatedTable = ({ teamsData }) => {
   const [open, setOpen] = useState(false);
 
   //state to store the teams data
-  const [teams, setTeams] = useState(teamsData);
+  const [teams, setTeams] = useState([]);
 
   //state to store selected team data
   const [teamStat, setTeamStat] = useState();
@@ -84,8 +84,10 @@ export const PaginatedTable = ({ teamsData }) => {
   };
 
   useEffect(() => {
+    //console.log("running paginate function", teamsData, teams);
     paginate(1);
-  }, []);
+    setTeams(teamsData);
+  }, [teams, teamsData]);
 
   if (teamsData.length === 0) {
     return <h1>No data found</h1>;
@@ -98,6 +100,7 @@ export const PaginatedTable = ({ teamsData }) => {
       <table className="w-full border-2 border-red-300 relative">
         <thead>
           <tr className="bg-blue-800 text-2xl text-white text-center">
+            <th className="p-4">Team ID</th>
             <th className="p-4">Team Name</th>
             <th>
               City{" "}
@@ -120,6 +123,7 @@ export const PaginatedTable = ({ teamsData }) => {
                 getStats(team.id, team.full_name, team.abbreviation)
               }
             >
+              <td className="p-4">{team.id}</td>
               <td className="p-4">{team.full_name}</td>
               <td>{team.city}</td>
               <td>{team.abbreviation}</td>
